@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import userRouter from './routes/user.route.js';
-import authRouter from './routes/auth.route.js'
+import authRouter from './routes/auth.route.js';
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ mongoose
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
 const port = 4000;
 
@@ -24,4 +24,4 @@ app.listen(port, () => {
 
 app.use('/api/user', userRouter);
 
-app.use('/api/auth', authRouter)
+app.use('/api/auth', authRouter);

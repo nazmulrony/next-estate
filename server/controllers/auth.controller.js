@@ -1,5 +1,3 @@
 export const signup = (req, res) => {
-    // console.log(req.body);
-    res.send('sent')
-
-}
+	console.log(req.body);
+};
