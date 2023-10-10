@@ -15,6 +15,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Container from "@/components/Container";
 import Link from "next/link";
+import axios from "axios";
+import { error } from "console";
+import { Axios } from "@/lib/axios";
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -29,11 +32,26 @@ const formSchema = z.object({
 export default function SignUpPage() {
     const form = useForm({
         resolver: zodResolver(formSchema),
+        defaultValues: {
+            username: "",
+            email: "",
+            password: "",
+        },
     });
 
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(data);
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        try {
+            const res = await Axios.post("/auth/signup", data, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log("Signup successful:", res.data);
+        } catch (error) {
+            console.error("Signup failed:", error);
+        }
     };
+
     return (
         <div>
             <Container>
