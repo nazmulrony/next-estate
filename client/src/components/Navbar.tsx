@@ -13,7 +13,7 @@ export default function Navbar() {
                         <Image
                             src={"/images/logo.png"}
                             alt=""
-                            className="object-contain h-10 w-36 md:w-48 "
+                            className="object-contain h-10 w-28 md:w-48 "
                             width={180}
                             height={100}
                         />
