@@ -65,9 +65,9 @@ export default function SignInPage() {
     return (
         <div>
             <Container>
-                <div className="max-w-lg mx-auto  h-full  ">
+                <div className="max-w-lg mx-auto my-16  ">
                     <h1 className="text-3xl text-center font-semibold  ">
-                        Sign Up
+                        Sign In
                     </h1>
 
                     <Form {...form}>
@@ -126,7 +126,7 @@ export default function SignInPage() {
                         </form>
                         <p className="mt-4">
                             New to Next Estate?
-                            <Link href="/sign-in">
+                            <Link href="/sign-up">
                                 <Button
                                     variant="link"
                                     color="blue"
