@@ -20,9 +20,6 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
 
 const formSchema = z.object({
-    username: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
-    }),
     email: z.string(),
     password: z.string().min(6, {
         message: "password must be at least 6 characters",
@@ -52,15 +49,17 @@ export default function SignInPage() {
                     "Content-Type": "application/json",
                 },
             });
-            console.log("Signup successful:", res.data);
-            // router.push("/sign-in");
+            console.log("Sign in successful:", res.data);
+            router.push("/");
         } catch (error: any) {
-            console.error("Signup failed:", error?.response?.data?.message);
+            console.error("Sign in failed:", error?.response?.data?.message);
             setError(error?.response?.data?.message);
         } finally {
             setIsLoading(false);
         }
     };
+
+    // console.log(isLoading);
 
     return (
         <div>
@@ -121,7 +120,7 @@ export default function SignInPage() {
                                         className="mr-2 h-4 w-4 animate-spin"
                                     />
                                 )}
-                                Sign up
+                                Sign in
                             </Button>
                         </form>
                         <p className="mt-4">
