@@ -18,6 +18,13 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    signInFailure,
+    signInStart,
+    signInSuccess,
+    userSelector,
+} from "@/redux/user/userSlice";
 
 const formSchema = z.object({
     email: z.string(),
@@ -28,9 +35,12 @@ const formSchema = z.object({
 
 export default function SignInPage() {
     const router = useRouter();
+
+    const { currentUser, error, isLoading } = useSelector(userSelector);
+    const dispatch = useDispatch();
     //states
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
+    // const [isLoading, setIsLoading] = useState<boolean>(false);
+    // const [error, setError] = useState<string | null>(null);
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -41,8 +51,8 @@ export default function SignInPage() {
     });
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        setIsLoading(true);
-        setError(null);
+        dispatch(signInStart());
+
         try {
             const res = await Axios.post("/auth/signin", data, {
                 headers: {
@@ -50,12 +60,11 @@ export default function SignInPage() {
                 },
             });
             console.log("Sign in successful:", res.data);
+            dispatch(signInSuccess(res.data));
             router.push("/");
         } catch (error: any) {
-            console.error("Sign in failed:", error?.response?.data?.message);
-            setError(error?.response?.data?.message);
-        } finally {
-            setIsLoading(false);
+            // console.error("Sign in failed:", error?.response?.data?.message);
+            dispatch(signInFailure(error?.response?.data?.message));
         }
     };
 
