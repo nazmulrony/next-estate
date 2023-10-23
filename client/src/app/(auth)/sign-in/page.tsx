@@ -25,6 +25,7 @@ import {
     signInSuccess,
     userSelector,
 } from "@/redux/user/userSlice";
+import OAuth from "@/components/OAuth";
 
 const formSchema = z.object({
     email: z.string(),
@@ -129,6 +130,7 @@ export default function SignInPage() {
                                 )}
                                 Sign in
                             </Button>
+                            <OAuth />
                         </form>
                         <p className="mt-4">
                             New to Next Estate?

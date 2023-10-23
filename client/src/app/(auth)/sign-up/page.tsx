@@ -1,5 +1,6 @@
 "use client";
 import Container from "@/components/Container";
+import OAuth from "@/components/OAuth";
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -141,6 +142,7 @@ export default function SignUpPage() {
                                 )}
                                 Sign up
                             </Button>
+                            <OAuth />
                         </form>
                         <p className="mt-4">
                             Have an account ?
