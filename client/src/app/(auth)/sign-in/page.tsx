@@ -38,9 +38,6 @@ export default function SignInPage() {
 
     const { currentUser, error, isLoading } = useSelector(userSelector);
     const dispatch = useDispatch();
-    //states
-    // const [isLoading, setIsLoading] = useState<boolean>(false);
-    // const [error, setError] = useState<string | null>(null);
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -59,11 +56,12 @@ export default function SignInPage() {
                     "Content-Type": "application/json",
                 },
             });
-            console.log("Sign in successful:", res.data);
+            console.log(res);
+            // console.log("Sign in successful:", res.data);
             dispatch(signInSuccess(res.data));
             router.push("/");
         } catch (error: any) {
-            // console.error("Sign in failed:", error?.response?.data?.message);
+            console.log(error);
             dispatch(signInFailure(error?.response?.data?.message));
         }
     };
