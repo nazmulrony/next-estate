@@ -13,7 +13,7 @@ export default function Navbar() {
     return (
         <header className=" w-full bg-slate-200 shadow-md">
             <Container>
-                <div className="py-4 flex justify-between items-center">
+                <div className="py-2 md:py-4 flex justify-between items-center">
                     <Link href="/">
                         <Image
                             src={"/images/logo.png"}
