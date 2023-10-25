@@ -67,96 +67,100 @@ export default function SignUpPage() {
     return (
         <div>
             <Container>
-                <div className="max-w-lg mx-auto my-16 ">
-                    <h1 className="text-3xl text-center font-semibold  ">
-                        Sign Up
-                    </h1>
+                <div className="h-[85vh] grid place-items-center">
+                    <div className="w-full sm:w-2/4 mx-auto md:w-[500px]   ">
+                        <h1 className="text-3xl text-center font-semibold  ">
+                            Sign Up
+                        </h1>
 
-                    <Form {...form}>
-                        <form
-                            onSubmit={form.handleSubmit(onSubmit)}
-                            className="space-y-4  "
-                        >
-                            <FormField
-                                control={form.control}
-                                name="username"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Username</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                required
-                                                placeholder="username"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
+                        <Form {...form}>
+                            <form
+                                onSubmit={form.handleSubmit(onSubmit)}
+                                className="space-y-4  "
+                            >
+                                <FormField
+                                    control={form.control}
+                                    name="username"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Username</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    required
+                                                    placeholder="username"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="email"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Email</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="email"
+                                                    required
+                                                    placeholder="email"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="password"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Password</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="password"
+                                                    required
+                                                    placeholder="password"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                {error && (
+                                    <p className="text-sm text-red-500">
+                                        {error}
+                                    </p>
                                 )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="email"
-                                                required
-                                                placeholder="email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="password"
-                                                required
-                                                placeholder="password"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            {error && (
-                                <p className="text-sm text-red-500">{error}</p>
-                            )}
-                            <Button type="submit" className="w-full">
-                                {isLoading && (
-                                    <Loader2
-                                        color="white"
-                                        className="mr-2 h-4 w-4 animate-spin"
-                                    />
-                                )}
-                                Sign up
-                            </Button>
-                            <OAuth />
-                        </form>
-                        <p className="mt-4">
-                            Have an account ?
-                            <Link href="/sign-in">
-                                <Button
-                                    variant="link"
-                                    color="blue"
-                                    className="text-blue-500 m-0 px-2"
-                                >
-                                    Sign in
+                                <Button type="submit" className="w-full">
+                                    {isLoading && (
+                                        <Loader2
+                                            color="white"
+                                            className="mr-2 h-4 w-4 animate-spin"
+                                        />
+                                    )}
+                                    Sign up
                                 </Button>
-                            </Link>
-                        </p>
-                    </Form>
+                                <OAuth />
+                            </form>
+                            <p className="mt-4">
+                                Have an account ?
+                                <Link href="/sign-in">
+                                    <Button
+                                        variant="link"
+                                        color="blue"
+                                        className="text-blue-500 m-0 px-2"
+                                    >
+                                        Sign in
+                                    </Button>
+                                </Link>
+                            </p>
+                        </Form>
+                    </div>
                 </div>
             </Container>
         </div>
