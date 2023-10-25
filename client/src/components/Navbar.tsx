@@ -1,10 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Container from "./Container";
 import { Input } from "./ui/input";
 import { Search } from "lucide-react";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { userSelector } from "@/redux/user/userSlice";
 
 export default function Navbar() {
+    const { currentUser } = useSelector(userSelector);
     return (
         <header className=" w-full bg-slate-200 shadow-md">
             <Container>
@@ -38,9 +43,23 @@ export default function Navbar() {
                                 About
                             </li>
                         </Link>
-                        <Link href="/sign-in">
-                            <li className="  text-slate-700">Sign in</li>
-                        </Link>
+                        {currentUser?.avatar ? (
+                            <Link href="/profile">
+                                <li className="  text-slate-700">
+                                    <Image
+                                        src={currentUser?.avatar}
+                                        alt="profile"
+                                        className="rounded-full object-cover"
+                                        height={28}
+                                        width={28}
+                                    />
+                                </li>
+                            </Link>
+                        ) : (
+                            <Link href="/sign-in">
+                                <li className="  text-slate-700">Sign in</li>
+                            </Link>
+                        )}
                     </ul>
                 </div>
             </Container>

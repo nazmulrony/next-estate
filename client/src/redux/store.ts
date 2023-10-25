@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
     key: "nexEstate",
     storage,
-    version: 1,
+    // version: 1,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
