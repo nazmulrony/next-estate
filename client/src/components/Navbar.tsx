@@ -50,8 +50,8 @@ export default function Navbar() {
                                         src={currentUser?.avatar}
                                         alt="profile"
                                         className="rounded-full object-cover"
-                                        height={28}
-                                        width={28}
+                                        height={36}
+                                        width={36}
                                     />
                                 </li>
                             </Link>
