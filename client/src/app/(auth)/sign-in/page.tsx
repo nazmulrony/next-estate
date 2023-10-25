@@ -58,7 +58,7 @@ export default function SignInPage() {
                 },
             });
             console.log(res);
-            // console.log("Sign in successful:", res.data);
+            console.log("Sign in successful:", res.data);
             dispatch(signInSuccess(res.data));
             router.push("/");
         } catch (error: any) {

@@ -50,3 +50,39 @@ export const signin = async (req, res, next) => {
         next(error);
     }
 };
+
+export const google = async (req, res, next) => {
+    console.log(req.body);
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        if (user) {
+            const { password, ...rest } = user._doc;
+            const token = tokenService.loginToken({ _id: user._id }, "30d");
+            //sending the user with a generated token
+            res.status(200).json({ ...rest, token });
+        } else {
+            const generatedPassword =
+                Math.random().toString(36).slice(-8) +
+                Math.random().toString(36).slice(-8);
+
+            const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
+
+            const newUser = new User({
+                username:
+                    req.body.name.split(" ").join("").toLowerCase() +
+                    Math.random().toString(36).slice(-4),
+                email: req.body.email,
+                password: hashedPassword,
+                avatar: req.body.photo,
+            });
+            await newUser.save();
+            const token = tokenService.loginToken({ _id: newUser._id }, "30d");
+            const { password, ...rest } = newUser._doc;
+
+            // sending the user with a generated token and without hashed password
+            res.status(200).json({ ...rest, token });
+        }
+    } catch (error) {
+        next(error);
+    }
+};

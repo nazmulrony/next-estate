@@ -5,8 +5,13 @@ import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "@/firebase/firebase";
 import { Axios } from "@/lib/axios";
+import { useDispatch } from "react-redux";
+import { signInSuccess } from "@/redux/user/userSlice";
+import { useRouter } from "next/navigation";
 
 export default function OAuth() {
+    const dispatch = useDispatch();
+    const router = useRouter();
     const provider = new GoogleAuthProvider();
     const auth = getAuth(app);
 
@@ -20,11 +25,14 @@ export default function OAuth() {
                 photo: result.user.photoURL,
             };
 
-            Axios.post("/api/auth/google", userData, {
+            const res = await Axios.post("/auth/google", userData, {
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
+            // console.log("Google sign up", res);
+            dispatch(signInSuccess(res.data));
+            router.push("/");
         } catch (error) {
             console.log(error);
         }
