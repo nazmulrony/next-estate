@@ -124,10 +124,7 @@ export default function SignInPage() {
                                         {error}
                                     </p>
                                 )}
-                                <Button
-                                    type="submit"
-                                    className="w-full transition text-teal-950"
-                                >
+                                <Button type="submit" className="w-full ">
                                     {isLoading && (
                                         <Loader2
                                             color="white"
