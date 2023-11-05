@@ -24,7 +24,7 @@ export default function Profile() {
             <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
 
             <Form {...form}>
-                <form className="w-full sm:w-2/4 md:w-[500px] mx-auto flex flex-col gap-2">
+                <form className="w-full sm:w-2/4 md:w-[500px] mx-auto flex flex-col gap-2 pb-10">
                     <FormField
                         control={form.control}
                         name="photo"
@@ -32,7 +32,7 @@ export default function Profile() {
                             <Image
                                 src={currentUser?.avatar}
                                 alt="profile image"
-                                className="rounded-full mx-auto"
+                                className="rounded-full self-center "
                                 width={100}
                                 height={100}
                                 {...field}
@@ -44,7 +44,7 @@ export default function Profile() {
                         name="username"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Email</FormLabel>
+                                <FormLabel>Username</FormLabel>
                                 <FormControl>
                                     <Input
                                         type="text"
@@ -80,7 +80,7 @@ export default function Profile() {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Email</FormLabel>
+                                <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <Input
                                         type="password"
@@ -95,7 +95,17 @@ export default function Profile() {
                     />
                     <div className="mt-4 flex flex-col gap-4">
                         <Button type="submit">Update</Button>
-                        <Button type="button">Create Listing</Button>
+                        <Button type="button" className="bg-green-700">
+                            Create Listing
+                        </Button>
+                    </div>
+                    <div className=" flex justify-between">
+                        <Button variant="link" className="text-red-500 px-0">
+                            Delete account
+                        </Button>
+                        <Button variant="link" className="text-red-500 px-0">
+                            Sign out
+                        </Button>
                     </div>
                 </form>
             </Form>
