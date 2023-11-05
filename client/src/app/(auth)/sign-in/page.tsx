@@ -125,7 +125,6 @@ export default function SignInPage() {
                                     </p>
                                 )}
                                 <Button
-                                    variant="gradient"
                                     type="submit"
                                     className="w-full transition text-teal-950"
                                 >
