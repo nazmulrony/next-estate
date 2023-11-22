@@ -13,26 +13,54 @@ import {
 import { Input } from "@/components/ui/input";
 import { userSelector } from "@/redux/user/userSlice";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { getStorage, ref } from "firebase/storage";
+import { app } from "@/firebase/firebase";
 
 export default function Profile() {
+    const fileRef = useRef<HTMLInputElement | null>(null);
+    const [file, setFile] = useState<File | undefined>(undefined);
+
     const { currentUser } = useSelector(userSelector);
     const form = useForm();
+
+    //file upload api and method
+
+    useEffect(() => {
+        if (file) {
+            handleFileUpload(file);
+        }
+    }, [file]);
+
+    const handleFileUpload = (file: File) => {
+        const storage = getStorage(app);
+        const fileName = new Date().getTime() + file.name;
+        const storageRef = ref(storage, fileName);
+    };
     return (
         <Container>
             <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
 
             <Form {...form}>
                 <form className="w-full sm:w-2/4 md:w-[500px] mx-auto flex flex-col gap-2 pb-10">
+                    <Input
+                        onChange={(e) => setFile(e?.target?.files?.[0])}
+                        type="file"
+                        accept="image/*"
+                        ref={fileRef}
+                        className="hidden"
+                    />
                     <FormField
                         control={form.control}
                         name="photo"
                         render={({ field }) => (
                             <Image
+                                onClick={() => fileRef.current?.click()}
                                 src={currentUser?.avatar}
                                 alt="profile image"
-                                className="rounded-full self-center "
+                                className="rounded-full self-center cursor-pointer"
                                 width={100}
                                 height={100}
                                 {...field}
